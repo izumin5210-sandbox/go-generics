@@ -1,11 +1,14 @@
 package main
 
+import "strings"
+
 func testSliceUtils() {
 	printSubSection("mapSlice", testMapSlice)
 	printSubSection("flatMapSlice", testFlatMapSlice)
 	printSubSection("filterSlice", testFilterSlice)
 	printSubSection("filterMapSlice", testFilterMapSlice)
 	printSubSection("findSlice", testFindSlice)
+	printSubSection("indexSlice / lastIndexSlice", testIndexSlice)
 	printSubSection("containsSlice", testContainsSlice)
 	printSubSection("allSlice", testAllSlice)
 	printSubSection("someSlice", testSomeSlice)
@@ -103,6 +106,39 @@ func testFindSlice() {
 				return u.Age >= 20
 			})
 			return teens
+		},
+	)
+}
+
+func testIndexSlice() {
+	snippet(
+		func() interface{} {
+			return indexSlice([]string{"foo", "bar", "baz"}, func(v string) bool {
+				return strings.HasPrefix(v, "b")
+			})
+		},
+	)
+
+	snippet(
+		func() interface{} {
+			return indexSlice([]string{"foo", "bar", "baz"}, func(v string) bool {
+				return strings.HasPrefix(v, "a")
+			})
+		},
+	)
+
+	snippet(
+		func() interface{} {
+			return lastIndexSlice([]string{"foo", "bar", "baz"}, func(v string) bool {
+				return strings.HasPrefix(v, "b")
+			})
+		},
+	)
+	snippet(
+		func() interface{} {
+			return lastIndexSlice([]string{"foo", "bar", "baz"}, func(v string) bool {
+				return strings.HasPrefix(v, "a")
+			})
 		},
 	)
 }

@@ -51,6 +51,24 @@ func findSlice[In any](inputs []In, findFunc func(input In) bool) (result In, ok
 	return
 }
 
+func indexSlice[In any](inputs []In, predicate func(input In) bool) int {
+	for i, input := range inputs {
+		if predicate(input) {
+			return i
+		}
+	}
+	return -1
+}
+
+func lastIndexSlice[In any](inputs []In, predicate func(input In) bool) int {
+	for i := len(inputs) - 1; i >= 0; i-- {
+		if predicate(inputs[i]) {
+			return i
+		}
+	}
+	return -1
+}
+
 type comparableInterface[T any] interface {
 	Compare(a, b T) string
 }

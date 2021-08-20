@@ -78,6 +78,35 @@ teens
 // => &{Name:Bob Age:27}
 ```
 
+### indexSlice / lastIndexSlice
+```go
+indexSlice([]string{"foo", "bar", "baz"}, func(v string) bool {
+	return strings.HasPrefix(v, "b")
+})
+// => 1
+```
+
+```go
+indexSlice([]string{"foo", "bar", "baz"}, func(v string) bool {
+	return strings.HasPrefix(v, "a")
+})
+// => -1
+```
+
+```go
+lastIndexSlice([]string{"foo", "bar", "baz"}, func(v string) bool {
+	return strings.HasPrefix(v, "b")
+})
+// => 2
+```
+
+```go
+lastIndexSlice([]string{"foo", "bar", "baz"}, func(v string) bool {
+	return strings.HasPrefix(v, "a")
+})
+// => -1
+```
+
 ### containsSlice
 ```go
 containsSlice([]int{1, 5, 6}, 4)
@@ -197,7 +226,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc000328bd0]
+// => [0xc0003b5b60]
 ```
 
 
