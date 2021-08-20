@@ -16,6 +16,7 @@ func main() {
 	fmt.Println()
 
 	printSection("Slice utils", testSliceUtils)
+	printSection("Map utils", testMapUtils)
 	printSection("Set", testSet)
 	printSection("Sqlx utils", testSqlxUtils)
 }

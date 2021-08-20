@@ -215,6 +215,34 @@ intersectionSlice([]int{1, 2, 3}, []int{0, 1, 2})
 ```
 
 
+## Map utils
+### mapKeys / mapValues
+```go
+mapKeys(map[string]int{"foo": 1, "bar": 2, "baz": 3})
+// => [baz foo bar]
+```
+
+```go
+mapValues(map[string]int{"foo": 1, "bar": 2, "baz": 3})
+// => [1 2 3]
+```
+
+### mapTransformKeys / mapTransformValues
+```go
+transformMapKeys(map[string]int{"foo": 1, "bar": 2, "baz": 3}, func(k string) string {
+	return k + k
+})
+// => map[barbar:2 bazbaz:3 foofoo:1]
+```
+
+```go
+transformMapValues(map[string]int{"foo": 1, "bar": 2, "baz": 3}, func(v int) int {
+	return v * 2
+})
+// => map[bar:4 baz:6 foo:2]
+```
+
+
 ## Set
 ### setFromSlice
 ```go
@@ -253,7 +281,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc000504be8]
+// => [0xc00048d308]
 ```
 
 
