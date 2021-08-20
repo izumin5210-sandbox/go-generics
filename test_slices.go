@@ -12,6 +12,7 @@ func testSliceUtils() {
 	printSubSection("containsSlice", testContainsSlice)
 	printSubSection("allSlice", testAllSlice)
 	printSubSection("someSlice", testSomeSlice)
+	printSubSection("maxSlice / minSlice", testMaxSliceMinSlice)
 	printSubSection("compactSlice", testCompactSlice)
 	printSubSection("uniqSlice", testUniqSlice)
 	printSubSection("reduceSlice", testReduceSlice)
@@ -180,6 +181,23 @@ func testSomeSlice() {
 		func() interface{} {
 			return someSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
 				return len(v) >= 5
+			})
+		},
+	)
+}
+
+func testMaxSliceMinSlice() {
+	snippet(
+		func() interface{} {
+			return maxSlice([]string{"albatross", "dog", "horse"}, func(v string) int {
+				return len(v)
+			})
+		},
+	)
+	snippet(
+		func() interface{} {
+			return minSlice([]string{"albatross", "dog", "horse"}, func(v string) int {
+				return len(v)
 			})
 		},
 	)

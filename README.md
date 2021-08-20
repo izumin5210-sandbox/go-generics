@@ -143,6 +143,21 @@ someSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
 // => false
 ```
 
+### maxSlice / minSlice
+```go
+maxSlice([]string{"albatross", "dog", "horse"}, func(v string) int {
+	return len(v)
+})
+// => albatross
+```
+
+```go
+minSlice([]string{"albatross", "dog", "horse"}, func(v string) int {
+	return len(v)
+})
+// => dog
+```
+
 ### compactSlice
 ```go
 compactSlice([]string{"foo", "bar", "", "baz", ""})
@@ -226,7 +241,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc0003b5b60]
+// => [0xc0004445a0]
 ```
 
 

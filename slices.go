@@ -100,6 +100,30 @@ func someSlice[In any](inputs []In, predicate func(input In) bool) bool {
 	return ok
 }
 
+func maxSlice[In any](inputs []In, maxFunc func(input In) int) In {
+	var maxValue, maxIdx = 0, -1
+	for i, input := range inputs {
+		if maxIdx == -1 {
+			maxValue, maxIdx = maxFunc(input), i
+		} else if v := maxFunc(input); maxValue < v {
+			maxValue, maxIdx = v, i
+		}
+	}
+	return inputs[maxIdx]
+}
+
+func minSlice[In any](inputs []In, minFunc func(input In) int) In {
+	var minValue, minIdx = 0, -1
+	for i, input := range inputs {
+		if minIdx == -1 {
+			minValue, minIdx = minFunc(input), i
+		} else if v := minFunc(input); minValue > v {
+			minValue, minIdx = v, i
+		}
+	}
+	return inputs[minIdx]
+}
+
 func compactSlice[In comparable](inputs []In) []In {
 	var zero In
 	return filterNotSlice(inputs, func(input In) bool { return input == zero })
