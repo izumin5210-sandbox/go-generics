@@ -69,10 +69,6 @@ func lastIndexSlice[In any](inputs []In, predicate func(input In) bool) int {
 	return -1
 }
 
-type comparableInterface[T any] interface {
-	Compare(a, b T) string
-}
-
 func containsSlice[In comparable](inputs []In, want In) bool {
 	for _, input := range inputs {
 		if input == want {
