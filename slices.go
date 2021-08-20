@@ -8,6 +8,14 @@ func mapSlice[In any, Out any](inputs []In, mapFunc func(input In) Out) []Out {
 	return outputs
 }
 
+func flatMapSlice[In any, Out any](inputs []In, flatMapFunc func(input In) []Out) []Out {
+	outputs := make([]Out, 0, 2*len(inputs))
+	for _, input := range inputs {
+		outputs = append(outputs, flatMapFunc(input)...)
+	}
+	return outputs
+}
+
 func filterSlice[In any](inputs []In, filterFunc func(input In) bool) []In {
 	outputs := make([]In, 0, len(inputs))
 	for _, input := range inputs {

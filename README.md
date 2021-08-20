@@ -16,6 +16,17 @@ mapSlice([]string{"foobar", "baz"}, func(v string) int {
 // => [6 3]
 ```
 
+### flatMapSlice
+```go
+flatMapSlice([][]int{{1, 2}, {3, 4}}, func(v []int) []int {
+	results := []int{}
+	results = append(results, v...)
+	results = append(results, 100)
+	return results
+})
+// => [1 2 100 3 4 100]
+```
+
 ### filterSlice
 ```go
 filterSlice([]int{1, 2, 3, 4, 5, 6}, func(v int) bool {
@@ -156,7 +167,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc0002962a0]
+// => [0xc0002a3050]
 ```
 
 

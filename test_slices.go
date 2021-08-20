@@ -2,6 +2,7 @@ package main
 
 func testSliceUtils() {
 	printSubSection("mapSlice", testMapSlice)
+	printSubSection("flatMapSlice", testFlatMapSlice)
 	printSubSection("filterSlice", testFilterSlice)
 	printSubSection("filterMapSlice", testFilterMapSlice)
 	printSubSection("findSlice", testFindSlice)
@@ -25,6 +26,19 @@ func testMapSlice() {
 		func() interface{} {
 			return mapSlice([]string{"foobar", "baz"}, func(v string) int {
 				return len(v)
+			})
+		},
+	)
+}
+
+func testFlatMapSlice() {
+	snippet(
+		func() interface{} {
+			return flatMapSlice([][]int{{1, 2}, {3, 4}}, func(v []int) []int {
+				results := []int{}
+				results = append(results, v...)
+				results = append(results, 100)
+				return results
 			})
 		},
 	)
