@@ -202,6 +202,12 @@ differenceSlice([]int{1, 1, 2, 2, 3, 3, 4, 5}, []int{1, 2, 4})
 // => [3 3 5]
 ```
 
+### intersectionSlice
+```go
+intersectionSlice([]int{1, 2, 3}, []int{0, 1, 2})
+// => [1 2]
+```
+
 
 ## Set
 ### setFromSlice
@@ -241,7 +247,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc0004445a0]
+// => [0xc0003bf860]
 ```
 
 

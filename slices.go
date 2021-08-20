@@ -162,3 +162,10 @@ func differenceSlice[In comparable](inputs []In, values []In) []In {
 		return set.Contains(input)
 	})
 }
+
+func intersectionSlice[In comparable](inputs []In, values []In) []In {
+	set := setFromSlice(values)
+	return filterSlice(inputs, func(input In) bool {
+		return set.Contains(input)
+	})
+}

@@ -18,6 +18,7 @@ func testSliceUtils() {
 	printSubSection("reduceSlice", testReduceSlice)
 	printSubSection("groupSliceBy", testGroupSliceBy)
 	printSubSection("differenceSlice", testDifferenceSlice)
+	printSubSection("intersectionSlice", testIntersectionSlice)
 }
 
 func testMapSlice() {
@@ -269,6 +270,14 @@ func testDifferenceSlice() {
 	snippet(
 		func() interface{} {
 			return differenceSlice([]int{1, 1, 2, 2, 3, 3, 4, 5}, []int{1, 2, 4})
+		},
+	)
+}
+
+func testIntersectionSlice() {
+	snippet(
+		func() interface{} {
+			return intersectionSlice([]int{1, 2, 3}, []int{0, 1, 2})
 		},
 	)
 }
