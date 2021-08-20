@@ -84,6 +84,36 @@ containsSlice([]int{1, 5, 6}, 4)
 // => false
 ```
 
+### allSlice
+```go
+allSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
+	return len(v) >= 3
+})
+// => true
+```
+
+```go
+allSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
+	return len(v) >= 4
+})
+// => false
+```
+
+### someSlice
+```go
+someSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
+	return len(v) >= 4
+})
+// => true
+```
+
+```go
+someSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
+	return len(v) >= 5
+})
+// => false
+```
+
 ### compactSlice
 ```go
 compactSlice([]string{"foo", "bar", "", "baz", ""})
@@ -167,7 +197,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc0002a3050]
+// => [0xc000328bd0]
 ```
 
 

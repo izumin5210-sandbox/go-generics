@@ -64,6 +64,28 @@ func containsSlice[In comparable](inputs []In, want In) bool {
 	return false
 }
 
+func allSlice[In any](inputs []In, predicate func(input In) bool) bool {
+	ok := true
+	for _, input := range inputs {
+		ok = ok && predicate(input)
+		if !ok {
+			break
+		}
+	}
+	return ok
+}
+
+func someSlice[In any](inputs []In, predicate func(input In) bool) bool {
+	ok := false
+	for _, input := range inputs {
+		ok = ok || predicate(input)
+		if ok {
+			break
+		}
+	}
+	return ok
+}
+
 func compactSlice[In comparable](inputs []In) []In {
 	var zero In
 	return filterNotSlice(inputs, func(input In) bool { return input == zero })

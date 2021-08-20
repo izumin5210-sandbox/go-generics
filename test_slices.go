@@ -7,6 +7,8 @@ func testSliceUtils() {
 	printSubSection("filterMapSlice", testFilterMapSlice)
 	printSubSection("findSlice", testFindSlice)
 	printSubSection("containsSlice", testContainsSlice)
+	printSubSection("allSlice", testAllSlice)
+	printSubSection("someSlice", testSomeSlice)
 	printSubSection("compactSlice", testCompactSlice)
 	printSubSection("uniqSlice", testUniqSlice)
 	printSubSection("reduceSlice", testReduceSlice)
@@ -109,6 +111,40 @@ func testContainsSlice() {
 	snippet(
 		func() interface{} {
 			return containsSlice([]int{1, 5, 6}, 4)
+		},
+	)
+}
+
+func testAllSlice() {
+	snippet(
+		func() interface{} {
+			return allSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
+				return len(v) >= 3
+			})
+		},
+	)
+	snippet(
+		func() interface{} {
+			return allSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
+				return len(v) >= 4
+			})
+		},
+	)
+}
+
+func testSomeSlice() {
+	snippet(
+		func() interface{} {
+			return someSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
+				return len(v) >= 4
+			})
+		},
+	)
+	snippet(
+		func() interface{} {
+			return someSlice([]string{"ant", "bear", "cat"}, func(v string) bool {
+				return len(v) >= 5
+			})
 		},
 	)
 }
