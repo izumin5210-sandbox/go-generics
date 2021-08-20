@@ -8,6 +8,7 @@ func main() {
 	containsSliceTest()
 	compactSliceTest()
 	uniqSliceTest()
+	groupSliceByTest()
 	differenceSliceTest()
 }
 
@@ -124,6 +125,16 @@ func uniqSliceTest() {
 	fmt.Println(
 		`uniq(["a", "a", "b", "b", "c"]) =`,
 		uniqSlice([]string{"a", "a", "b", "b", "c"}),
+	)
+
+	fmt.Println()
+}
+
+func groupSliceByTest() {
+	fmt.Println("## groupSliceBy")
+	fmt.Println(
+		"groupBy([1, 2, 3, 4, 5, 6], (v) => v % 3) ==",
+		groupSliceBy([]int{1, 2, 3, 4, 5, 6}, func(v int) int { return v % 3 }),
 	)
 
 	fmt.Println()
