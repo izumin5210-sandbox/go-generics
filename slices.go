@@ -156,6 +156,15 @@ func groupSliceBy[In comparable, Key comparable](inputs []In, keyFunc func(input
 	return result
 }
 
+func reverseSlice[In comparable](inputs []In) []In {
+	n := len(inputs)
+	outputs := make([]In, n)
+	for i, input := range inputs {
+		outputs[n-1-i] = input
+	}
+	return outputs
+}
+
 func differenceSlice[In comparable](inputs []In, values []In) []In {
 	set := setFromSlice(values)
 	return filterNotSlice(inputs, func(input In) bool {

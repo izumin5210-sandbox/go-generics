@@ -196,6 +196,12 @@ groupSliceBy([]int{1, 2, 3, 4, 5, 6}, func(v int) int { return v % 3 })
 // => map[0:[3 6] 1:[1 4] 2:[2 5]]
 ```
 
+### reverseSlice
+```go
+reverseSlice([]int{1, 2, 3, 4, 5})
+// => [5 4 3 2 1]
+```
+
 ### differenceSlice
 ```go
 differenceSlice([]int{1, 1, 2, 2, 3, 3, 4, 5}, []int{1, 2, 4})
@@ -247,7 +253,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc0003bf860]
+// => [0xc000504be8]
 ```
 
 

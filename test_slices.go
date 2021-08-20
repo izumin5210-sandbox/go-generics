@@ -17,6 +17,7 @@ func testSliceUtils() {
 	printSubSection("uniqSlice", testUniqSlice)
 	printSubSection("reduceSlice", testReduceSlice)
 	printSubSection("groupSliceBy", testGroupSliceBy)
+	printSubSection("reverseSlice", testReverseSlice)
 	printSubSection("differenceSlice", testDifferenceSlice)
 	printSubSection("intersectionSlice", testIntersectionSlice)
 }
@@ -262,6 +263,14 @@ func testGroupSliceBy() {
 	snippet(
 		func() interface{} {
 			return groupSliceBy([]int{1, 2, 3, 4, 5, 6}, func(v int) int { return v % 3 })
+		},
+	)
+}
+
+func testReverseSlice() {
+	snippet(
+		func() interface{} {
+			return reverseSlice([]int{1, 2, 3, 4, 5})
 		},
 	)
 }
