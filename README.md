@@ -46,6 +46,19 @@ mapSlice(
 // => [Alice Carol]
 ```
 
+### findSlice
+```go
+type User struct {
+	Name string
+	Age  int
+}
+teens, _ := findSlice([]*User{{Name: "Alice", Age: 18}, {Name: "Bob", Age: 27}, {Name: "Carol", Age: 24}}, func(u *User) bool {
+	return u.Age >= 20
+})
+teens
+// => &{Name:Bob Age:27}
+```
+
 ### containsSlice
 ```go
 containsSlice([]int{1, 5, 6}, 4)
@@ -127,7 +140,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc0002d1c20]
+// => [0xc0002629a8]
 ```
 
 

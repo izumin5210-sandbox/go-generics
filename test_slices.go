@@ -3,6 +3,7 @@ package main
 func testSliceUtils() {
 	printSubSection("mapSlice", testMapSlice)
 	printSubSection("filterSlice", testFilterSlice)
+	printSubSection("findSlice", testFindSlice)
 	printSubSection("containsSlice", testContainsSlice)
 	printSubSection("compactSlice", testCompactSlice)
 	printSubSection("uniqSlice", testUniqSlice)
@@ -59,6 +60,21 @@ func testFilterSlice() {
 				nonAdminUsers,
 				func(user *User) string { return user.Name },
 			)
+		},
+	)
+}
+
+func testFindSlice() {
+	snippet(
+		func() interface{} {
+			type User struct {
+				Name string
+				Age  int
+			}
+			teens, _ := findSlice([]*User{{Name: "Alice", Age: 18}, {Name: "Bob", Age: 27}, {Name: "Carol", Age: 24}}, func(u *User) bool {
+				return u.Age >= 20
+			})
+			return teens
 		},
 	)
 }

@@ -22,6 +22,16 @@ func filterNotSlice[In any](inputs []In, filterFunc func(input In) bool) []In {
 	return filterSlice(inputs, func(input In) bool { return !filterFunc(input) })
 }
 
+func findSlice[In any](inputs []In, findFunc func(input In) bool) (result In, ok bool) {
+	for _, input := range inputs {
+		if findFunc(input) {
+			result = input
+			return
+		}
+	}
+	return
+}
+
 type comparableInterface[T any] interface {
 	Compare(a, b T) string
 }
