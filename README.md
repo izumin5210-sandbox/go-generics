@@ -114,3 +114,20 @@ set.Add(3)
 ```
 
 
+## Sqlx utils
+### SqlxSelect
+```go
+type User struct {
+	ID   uint64
+	Name string
+}
+ctx := context.Background()
+users, err := sqlxSelect[*User](ctx, db, "SELECT * FROM users")
+if err != nil {
+	panic(err)
+}
+users
+// => [0xc0002d1c20]
+```
+
+

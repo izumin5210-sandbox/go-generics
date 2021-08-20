@@ -1,4 +1,5 @@
 CREATE TABLE users (
-    id bigint NOT NULL,
-    name text
+    id serial,
+    name text,
+    primary key (id)
 );
