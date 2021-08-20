@@ -1,4 +1,5 @@
 # Go Generics By Example
+
 ## Slice utils
 ### mapSlice
 ```go
@@ -85,6 +86,31 @@ groupSliceBy([]int{1, 2, 3, 4, 5, 6}, func(v int) int { return v % 3 })
 ```go
 differenceSlice([]int{1, 1, 2, 2, 3, 3, 4, 5}, []int{1, 2, 4})
 // => [3 3 5]
+```
+
+
+## Set
+### setFromSlice
+```go
+set := setFromSlice([]int{1, 2, 3})
+[]bool{
+	set.Contains(2),
+	set.Contains(4),
+}
+// => [true false]
+```
+
+### makeSet
+```go
+set := makeSet[int](3)
+set.Add(1)
+set.Add(2)
+set.Add(3)
+[]bool{
+	set.Contains(2),
+	set.Contains(4),
+}
+// => [true false]
 ```
 
 

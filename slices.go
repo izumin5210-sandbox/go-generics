@@ -66,29 +66,3 @@ func differenceSlice[In comparable](inputs []In, values []In) []In {
 		return set.Contains(input)
 	})
 }
-
-func makeSet[T comparable](capacity int) set[T] {
-	values := make(map[T]struct{}, capacity)
-	return set[T]{values: values}
-}
-
-func setFromSlice[T comparable](slice []T) set[T] {
-	values := make(map[T]struct{}, len(slice))
-	for _, v := range slice {
-		values[v] = struct{}{}
-	}
-	return set[T]{values: values}
-}
-
-type set[T comparable] struct {
-	values map[T]struct{}
-}
-
-func (s set[T]) Add(t T) {
-	s.values[t] = struct{}{}
-}
-
-func (s set[T]) Contains(t T) bool {
-	_, ok := s.values[t]
-	return ok
-}

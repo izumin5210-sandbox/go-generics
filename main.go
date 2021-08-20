@@ -16,6 +16,7 @@ func main() {
 	fmt.Println()
 
 	printSection("Slice utils", testSliceUtils)
+	printSection("Set", testSet)
 }
 
 func printSection(title string, body func()) {
