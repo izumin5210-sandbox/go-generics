@@ -12,6 +12,9 @@ import (
 )
 
 func main() {
+	fmt.Println("# Go Generics By Example")
+	fmt.Println()
+
 	printSection("Slice utils", testSliceUtils)
 }
 
