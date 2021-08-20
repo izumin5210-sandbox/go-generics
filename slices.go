@@ -18,6 +18,17 @@ func filterSlice[In any](inputs []In, filterFunc func(input In) bool) []In {
 	return outputs
 }
 
+func filterMapSlice[In any](inputs []In, filterMapFunc func(input In) (In, bool)) []In {
+	outputs := make([]In, 0, len(inputs))
+	for _, input := range inputs {
+		output, ok := filterMapFunc(input)
+		if ok {
+			outputs = append(outputs, output)
+		}
+	}
+	return outputs
+}
+
 func filterNotSlice[In any](inputs []In, filterFunc func(input In) bool) []In {
 	return filterSlice(inputs, func(input In) bool { return !filterFunc(input) })
 }

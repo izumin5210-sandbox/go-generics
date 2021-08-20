@@ -3,10 +3,10 @@
 ## Slice utils
 ### mapSlice
 ```go
-mapSlice([]int{1, 2, 3}, func(v int) int {
+mapSlice([]int{1, 2, 3, 4}, func(v int) int {
 	return v * 2
 })
-// => [2 4 6]
+// => [2 4 6 8]
 ```
 
 ```go
@@ -44,6 +44,14 @@ mapSlice(
 	func(user *User) string { return user.Name },
 )
 // => [Alice Carol]
+```
+
+### filterMapSlice
+```go
+filterMapSlice([]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}, func(v int) (int, bool) {
+	return v * 2, v%2 == 0
+})
+// => [4 8 12 16 20]
 ```
 
 ### findSlice
@@ -140,7 +148,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc0002629a8]
+// => [0xc00025d650]
 ```
 
 
