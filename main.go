@@ -1,151 +1,60 @@
 package main
 
-import "fmt"
+import (
+	"bytes"
+	"fmt"
+	"go/ast"
+	"go/format"
+	"go/parser"
+	"go/token"
+	"runtime"
+	"strings"
+)
 
 func main() {
-	mapSliceTest()
-	filterSliceTest()
-	containsSliceTest()
-	compactSliceTest()
-	uniqSliceTest()
-	groupSliceByTest()
-	differenceSliceTest()
+	printSection("Slice utils", testSliceUtils)
 }
 
-func mapSliceTest() {
-	fmt.Println("## mapSlice")
-	fmt.Println(
-		"double elements",
-		mapSlice([]int{1, 2, 3}, func(v int) int {
-			return v * 2
-		}),
-	)
-
-	fmt.Println(
-		"length of each strings",
-		mapSlice([]string{"foobar", "baz"}, func(v string) int {
-			return len(v)
-		}),
-	)
-
+func printSection(title string, body func()) {
+	fmt.Printf("## %s\n", title)
+	body()
 	fmt.Println()
 }
 
-func filterSliceTest() {
-	fmt.Println("## fliterSlice")
-	fmt.Println(
-		"extract even numbers",
-		filterSlice([]int{1, 2, 3, 4, 5, 6}, func(v int) bool {
-			return v/2 == 0
-		}),
-	)
+func printSubSection(title string, body func()) {
+	fmt.Printf("### %s\n", title)
+	body()
+}
 
-	type User struct {
-		ID    int
-		Name  string
-		Admin bool
+func snippet(f func() interface{}) {
+	_, filename, line, _ := runtime.Caller(1)
+
+	fset := token.NewFileSet()
+	file, err := parser.ParseFile(fset, filename, nil, 0)
+	if err != nil {
+		panic(err)
 	}
 
-	users := []*User{
-		{ID: 1, Name: "Alice"},
-		{ID: 2, Name: "Bob", Admin: true},
-		{ID: 3, Name: "Carol"},
-	}
-	adminUsers := filterSlice(
-		users,
-		func(user *User) bool { return user.Admin },
-	)
-	fmt.Println(
-		"extract admin users ",
-		mapSlice(
-			adminUsers,
-			func(user *User) string { return user.Name },
-		),
-	)
+	var stmts []string
+	ast.Inspect(file, func(n ast.Node) bool {
+		if callExpr, ok := n.(*ast.CallExpr); ok && fset.Position(n.Pos()).Line == line {
+			for _, stmt := range callExpr.Args[0].(*ast.FuncLit).Body.List {
+				var buf bytes.Buffer
+				if retStmt, ok := stmt.(*ast.ReturnStmt); ok {
+					format.Node(&buf, fset, &ast.ExprStmt{X: retStmt.Results[0]})
+				} else {
+					format.Node(&buf, fset, stmt)
+				}
+				stmts = append(stmts, buf.String())
+			}
+			return false
+		}
+		return true
+	})
 
-	nonAdminUsers := filterNotSlice(
-		users,
-		func(user *User) bool { return user.Admin },
-	)
-	fmt.Println(
-		"extract non-admin users ",
-		mapSlice(
-			nonAdminUsers,
-			func(user *User) string { return user.Name },
-		),
-	)
-
-	fmt.Println()
-}
-
-func containsSliceTest() {
-	fmt.Println("## containsSlice")
-	fmt.Println(
-		"contains 4",
-		containsSlice([]int{1, 5, 6}, 4),
-	)
-
-	fmt.Println()
-}
-
-func compactSliceTest() {
-	fmt.Println("## compactSlice")
-	fmt.Println(
-		"compact strings",
-		compactSlice([]string{"foo", "bar", "", "baz", ""}),
-	)
-
-	type User struct {
-		ID   int
-		Name string
-	}
-
-	fmt.Println(
-		"compact structs",
-		mapSlice(
-			compactSlice([]User{{ID: 1, Name: "Alice"}, {}, {ID: 2, Name: "Bob"}}),
-			func(user User) string { return user.Name },
-		),
-	)
-
-	// compiler panics
-	// fmt.Println(
-	//   "compact structs",
-	//   mapSlice(
-	//     compactSlice([]*User{{ID: 1, Name: "Alice"}, nil, {ID: 2, Name: "Bob"}}),
-	//     func(user *User) string { return user.Name },
-	//   ),
-	// )
-
-	fmt.Println()
-}
-
-func uniqSliceTest() {
-	fmt.Println("## uniqSlice")
-	fmt.Println(
-		`uniq(["a", "a", "b", "b", "c"]) =`,
-		uniqSlice([]string{"a", "a", "b", "b", "c"}),
-	)
-
-	fmt.Println()
-}
-
-func groupSliceByTest() {
-	fmt.Println("## groupSliceBy")
-	fmt.Println(
-		"groupBy([1, 2, 3, 4, 5, 6], (v) => v % 3) ==",
-		groupSliceBy([]int{1, 2, 3, 4, 5, 6}, func(v int) int { return v % 3 }),
-	)
-
-	fmt.Println()
-}
-
-func differenceSliceTest() {
-	fmt.Println("## differenceSlice")
-	fmt.Println(
-		"[1, 1, 2, 2, 3, 3, 4, 5] - [1, 2, 4] =",
-		differenceSlice([]int{1, 1, 2, 2, 3, 3, 4, 5}, []int{1, 2, 4}),
-	)
-
+	fmt.Println("```go")
+	fmt.Println(strings.Join(stmts, "\n"))
+	fmt.Printf("// => %+v\n", f())
+	fmt.Println("```")
 	fmt.Println()
 }
