@@ -72,6 +72,13 @@ func uniqSlice[In comparable](inputs []In) []In {
 	})
 }
 
+func reduceSlice[In any, Out any](inputs []In, reduceFunc func(acc Out, input In) Out, acc Out) Out {
+	for _, input := range inputs {
+		acc = reduceFunc(acc, input)
+	}
+	return acc
+}
+
 func groupSliceBy[In comparable, Key comparable](inputs []In, keyFunc func(input In) Key) map[Key][]In {
 	result := make(map[Key][]In, len(inputs))
 	for _, input := range inputs {

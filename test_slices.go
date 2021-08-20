@@ -8,6 +8,7 @@ func testSliceUtils() {
 	printSubSection("containsSlice", testContainsSlice)
 	printSubSection("compactSlice", testCompactSlice)
 	printSubSection("uniqSlice", testUniqSlice)
+	printSubSection("reduceSlice", testReduceSlice)
 	printSubSection("groupSliceBy", testGroupSliceBy)
 	printSubSection("differenceSlice", testDifferenceSlice)
 }
@@ -138,6 +139,16 @@ func testUniqSlice() {
 	snippet(
 		func() interface{} {
 			return uniqSlice([]string{"a", "a", "b", "b", "c"})
+		},
+	)
+}
+
+func testReduceSlice() {
+	snippet(
+		func() interface{} {
+			return reduceSlice([]int{1, 2, 3, 4, 5}, func(n int, acc int) int {
+				return acc + n
+			}, 0)
 		},
 	)
 }

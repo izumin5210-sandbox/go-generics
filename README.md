@@ -97,6 +97,14 @@ uniqSlice([]string{"a", "a", "b", "b", "c"})
 // => [a b c]
 ```
 
+### reduceSlice
+```go
+reduceSlice([]int{1, 2, 3, 4, 5}, func(n int, acc int) int {
+	return acc + n
+}, 0)
+// => 15
+```
+
 ### groupSliceBy
 ```go
 groupSliceBy([]int{1, 2, 3, 4, 5, 6}, func(v int) int { return v % 3 })
@@ -148,7 +156,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc00025d650]
+// => [0xc0002962a0]
 ```
 
 
