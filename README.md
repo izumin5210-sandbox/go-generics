@@ -219,7 +219,7 @@ intersectionSlice([]int{1, 2, 3}, []int{0, 1, 2})
 ### mapKeys / mapValues
 ```go
 mapKeys(map[string]int{"foo": 1, "bar": 2, "baz": 3})
-// => [baz foo bar]
+// => [foo bar baz]
 ```
 
 ```go
@@ -268,6 +268,19 @@ set.Add(3)
 ```
 
 
+## Sync
+### syncMap
+### syncPool
+```go
+pool := newSyncPool(func() int { return 1 })
+v := pool.Get()
+defer pool.Put(v)
+v
+// => 1
+```
+
+### singleflight
+
 ## Sqlx utils
 ### SqlxSelect
 ```go
@@ -281,7 +294,7 @@ if err != nil {
 	panic(err)
 }
 users
-// => [0xc00048d308]
+// => [0xc00048d500]
 ```
 
 

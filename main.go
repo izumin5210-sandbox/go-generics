@@ -18,6 +18,7 @@ func main() {
 	printSection("Slice utils", testSliceUtils)
 	printSection("Map utils", testMapUtils)
 	printSection("Set", testSet)
+	printSection("Sync", testSync)
 	printSection("Sqlx utils", testSqlxUtils)
 }
 
